@@ -1,0 +1,24 @@
+<ul>
+{% for sg in all_songs %}
+<li>{{ sg[0] }} by {{ sg[1] }} - {{ sg[2] }}
+	<form method="POST" action="/update/{{ sg[0] }}">
+	{{ form.hidden_tag() }}
+	{{form.newRating.label }} {{ form.newRating() }}
+	{{ form.submit() }}
+   </form>
+ </li>
+ <br>
+{% endfor %}
+</ul>
+
+{% if not all_songs %}
+There are no saved favorite songs to show.
+{% endif %}
+
+<div>
+{% for message in get_flashed_messages() %}
+<strong>*** {{ message }} ***</strong>
+{% endfor %}
+</div>
+
+<a href="{{ url_for('index')}}">Return to add a new song</a>
